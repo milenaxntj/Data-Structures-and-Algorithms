@@ -14,7 +14,7 @@ struct pilha{
 };
 
 /**************************************
-* IMPLEMENTAÇÃO
+* IMPLEMENTAÇÃO*
 **************************************/
 // Desenvolva as funções
 Pilha* pilha_criar(){
