@@ -108,6 +108,28 @@ Pilha* pilha_clone(Pilha* p){
 	return clone;
 }
 
-void pilha_inverter(Pilha* p);
-bool pilha_empilharTodos(Pilha* p, TipoElemento* vetor, int tamVetor);
+void pilha_inverter(Pilha* p){
+	Pilha* aux = pilha_criar();
+
+	TipoElemento elemento = -1;
+
+	while (pilha_vazia(p) != 0){
+		pilha_desempilhar(p, &elemento);
+		pilha_empilhar(aux, elemento);
+	}
+
+	p->topo = aux->topo;
+	p->qtdeElementos = aux->qtdeElementos;
+	free(aux);
+}
+
+bool pilha_empilharTodos(Pilha* p, TipoElemento* vetor, int tamVetor){
+
+    for (int i = 0; i < tamVetor; i++){
+        pilha_empilhar(p, vetor[i]);
+    }
+
+    return true;
+}
+
 bool pilha_toString(Pilha* f, char* str);

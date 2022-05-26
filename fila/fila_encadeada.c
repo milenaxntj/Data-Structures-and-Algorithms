@@ -58,10 +58,42 @@ bool fila_remover(Fila* f, TipoElemento* saida){
     free(i);
 
 } // estratégia do scanf
-bool fila_primeiro(Fila* f, TipoElemento* saida); // estratégia do scanf
-bool fila_vazia(Fila* f);
-int fila_tamanho(Fila* f);
-void fila_imprimir(Fila* f);
-Fila* fila_clone(Fila* f);
+bool fila_primeiro(Fila* f, TipoElemento* saida){
+
+    *saida = f->inicio->dado;
+
+}// estratégia do scanf
+bool fila_vazia(Fila* f){
+    if(f->qtde == 0){
+        return true;
+    } else {
+        return false;
+    }
+}
+int fila_tamanho(Fila* f){
+    return f->qtde -1;
+}
+void fila_imprimir(Fila* f){
+
+}
+Fila* fila_clone(Fila* f){
+    Fila* clone = fila_criar();
+    No* aux = f->inicio;
+
+    for(int i = 0; i < f->qtde; i++){
+        fila_inserir(clone, aux->dado);
+        aux = aux->prox;
+    }
+
+    return clone;
+}
 bool fila_toString(Fila* f, char* str);
-bool fila_inserirTodos(Fila* f, TipoElemento* vetor, int tamVetor);
+bool fila_inserirTodos(Fila* f, TipoElemento* vetor, int tamVetor){
+
+    for (int i = 0; i < tamVetor; i++)
+    {
+        fila_inserir(f, vetor[i]);
+    }
+
+    return true;
+}
