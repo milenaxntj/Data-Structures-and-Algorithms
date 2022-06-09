@@ -36,7 +36,19 @@ Lista* lista_criar(){
     return nova;
 }
 
-void lista_destruir(Lista** endLista);
+void lista_destruir(Lista** endLista){
+    No *aux = (No *)malloc(sizeof(No));
+    aux = (*endLista)->inicio;
+
+    while (aux != NULL)
+    {
+        free(aux);
+        aux = aux->prox;
+    }
+
+    aux = (*endLista);
+    free(aux);
+}
 
 bool lista_anexar(Lista* l, TipoElemento elemento){
     No* aux = criar_no(elemento);
@@ -149,12 +161,12 @@ bool lista_substituir(Lista* l, int posicao, TipoElemento novoElemento){
         aux = l->fim;
     }
     else{
+        aux = l->inicio;
         for(int i = 0; i < posicao; i++){
             aux = aux->prox;
         }
     }
 
-    free(&(aux->dado));
     aux->dado = novoElemento;
 
     return true;    
@@ -175,13 +187,11 @@ int lista_posicao(Lista* l, TipoElemento elemento){
     int posicao;
     for(int i = 0; i < l->qtde; i++){  
         if(aux->dado == elemento){
-            i = posicao;
+            posicao = i;
             return posicao; // ????
         }
         aux = aux->prox;
     }
-
-
 }
 
 bool lista_buscar(Lista* l, int posicao, TipoElemento* endereco){
@@ -203,6 +213,7 @@ bool lista_contem(Lista* l, TipoElemento elemento){
     for(int i = 0; i < l->qtde; i++){
         if(aux->dado == elemento){
             verif++;
+
         }
         aux = aux->prox;
     }
