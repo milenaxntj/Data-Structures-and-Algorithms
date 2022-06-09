@@ -14,11 +14,29 @@ int main(){
     lista_imprimir(l); // [10 20 30 40]
 
     lista_anexar(l, 100);
+    lista_anexar(l, 500);
     lista_anexar(l, 60);
     lista_anexar(l, 80);
+    lista_imprimir(l);//[10 20 30 40 100 500 60 80]
+    printf("remover elemento 500\n");
 
+    int element;
+    int pos = 5;
+    lista_removerPosicao(l, pos, &element);
+    lista_imprimir(l); //[10 20 30 40 100 60 80]
     lista_inserir(l, 70, 6);
     lista_imprimir(l); //[10 20 30 40 100 60 70 80]
+    lista_anexar(l, 200);
+    lista_imprimir(l); //[10 20 30 40 100 60 70 80 200]
+
+    int posicaoRemo = lista_removerElemento(l, 200);
+    if(posicaoRemo != -1 ){
+        printf("\nPosicao removida");
+    }
+    
+    printf("\n");
+    lista_imprimir(l); //[10 20 30 40 100 60 70 80]
+
     printf("\nsubstituir posicaoo 4\n");
 
     lista_substituir(l, 4, 50); //[10 20 30 40 50 60 70 80]

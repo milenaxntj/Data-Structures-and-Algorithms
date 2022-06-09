@@ -37,17 +37,7 @@ Lista* lista_criar(){
 }
 
 void lista_destruir(Lista** endLista){
-    No *aux = (No *)malloc(sizeof(No));
-    aux = (*endLista)->inicio;
 
-    while (aux != NULL)
-    {
-        free(aux);
-        aux = aux->prox;
-    }
-
-    aux = (*endLista);
-    free(aux);
 }
 
 bool lista_anexar(Lista* l, TipoElemento elemento){
@@ -119,6 +109,8 @@ bool lista_removerPosicao(Lista* l, int posicao, TipoElemento* endereco){
         aux->prox = NULL;
     }
     else{
+        aux2 = l->inicio;
+        aux = l->inicio;
         for(int i = 0; i < posicao; i++){
             aux2 = aux2->prox;
         }
@@ -129,26 +121,26 @@ bool lista_removerPosicao(Lista* l, int posicao, TipoElemento* endereco){
 
     }
 
+
+    *endereco = aux2->dado;
     aux2->ant = NULL;
     aux2->prox = NULL;
 
-    *endereco = aux2->dado;
-
     l->qtde--;
+
+    return true;
 }
 
 int lista_removerElemento(Lista* l, TipoElemento elemento){
     No* aux = l->inicio;
-    int endereco, posicao;
+    int posicao = -1;
     for(int i = 0; i < l->qtde; i++){
-        
         if(aux->dado == elemento){
-            i = posicao;
-            lista_removerPosicao(l, i, &endereco);
+            lista_removerPosicao(l, i, &posicao);
+            l->qtde--;
         }
         aux = aux->prox;
     }
-
     return posicao;
 }
 
